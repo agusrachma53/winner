@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Winner</title>
+<link rel="stylesheet" type="text/css" href="style/style.css">
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.innerfade.js"></script>
+
+<script type="text/javascript"> 
+$(document).ready( 
+	function(){
+		$('#slider').innerfade({ 
+				speed: 'slow', 
+				timeout: 4000, 
+				type: 'sequence', 
+				containerheight: '430px' 
+		});
+	}
+); 
+</script>
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+	<div id="header">
+    	<div id="headerLeft">
+        	<img src="images/logo.png">
+        </div><!--end of headerLeft-->
+        
+        <div id="headerRight">
+        	<table>
+            	<tr>
+                	<td>Username</td>
+                    <td>Password</td>
+                    <td></td>
+                </tr>
+                <tr>
+                	<form>
+                        <td><input type="email" id="username" name="username"></td>
+                        <td><input type="password" id="pass" name="pass"></td>
+                        <td><input type="submit" value="Login"></td>
+                    </form>
+                </tr>
+            </table>        	
+        </div><!--end of headerRight-->
+    </div><!--end of header-->
+    
+	<div id="menu">
+    
+    	<ul>
+        	<li class="white borderRadiusLeft"><a href="index.html">Home</a></li>
+        	<li><a href="blogs.html">Blogs</a></li>
+        	<li><a href="news.html">News</a></li>
+        	<li><a href="gallery.html">Gallery</a></li>
+        	<li class="borderRadiusRight"><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </div><!--end of menu-->
+    
+	<div id="content">
+    
+    	<div id="slider">
+        	<div>
+        		<img src="images/slider1.jpg" class="sliderBorder">
+            </div> 
+            <div>
+        		<img src="images/slider2.jpg" class="sliderBorder">
+            </div>
+        	<div>
+        		<img src="images/slider3.jpg" class="sliderBorder">
+            </div>         	
+        </div><!--end of slider-->
+        	<img src="images/sliderbox_bg.png" class="shadow">            
+                      
+    	<div id="search">
+        	<form>
+                <input type="text" id="searchbox">
+                <input type="submit" value="Search">
+			</form>
+        </div><!--end of search-->
+        
+    	<div id="contentBottom">
+        
+        	<div id="bottomLeft">
+                        
+            	<div id="main">
+                
+                	<img src="images/1page_img4.jpg">                
+                    <h2>Business Opportunities</h2>
+                    <p>Praesent vestibulum molestie lacus. Aenean non- suscipit varius mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridicul- us mus. Nulla dui. Fusce feugiat malesuada odio.
+                    </p>
+                    <p>Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac sem. Duis ultri.
+                    </p>
+                    
+                </div><!--end of main-->
+                
+                <div id="list">
+                
+                	<h2>Our Solutions</h2>
+                	<div id="listLeft">
+                    	<ul>
+                        	<li><a href="#">Offering projects</a></li>
+                        	<li><a href="#">Providing projects</a></li>
+                        	<li><a href="#">Successful solutions</a></li>
+                        	<li><a href="#">Personal solutions</a></li>
+                        </ul>
+                    </div><!--end of listLeft-->
+                    
+                    <div id="listRight">
+                    	<ul>
+                        	<li><a href="#">Market solutions</a></li>
+                        	<li><a href="#">Business solutions</a></li>
+                        	<li><a href="#">Advisory solutions</a></li>
+                        	<li><a href="#">Saving solutions</a></li>
+                        </ul>
+                    </div><!--end of listRight-->
+                    
+                </div><!--end of list-->  
+                              
+            </div><!--end of bottomLeft-->
+            
+            <div id="bottomRight">
+            
+                <div id="news">
+                    <h2>Latest News</h2>
+                    <div id="news1">
+                        <img src="images/1page_img2.jpg">                    
+                        <h3>Title One</h3>
+                        <h4>25 April 2012 | 10:05 wib</h4>
+                        <p>Natoque penatibus et magnis dis parturient ontes, nascetur ridiculus mus. Nulla dui. Fusce feugiat suada odio. Morbi nunc odio.
+                        </p>
+                    </div><!--end of news1-->
+                    <div id="news2">
+                        <img src="images/1page_img1.jpg">                    
+                        <h3>Title One</h3>
+                        <h4>25 April 2012 | 10:05 wib</h4>
+                        <p>Natoque penatibus et magnis dis parturient ontes, nascetur ridiculus mus. Nulla dui. Fusce feugiat suada odio. Morbi nunc odio.
+                        </p>
+                    </div><!--end of news2-->
+                    <div id="news3">
+                        <img src="images/1page_img2.jpg">                    
+                        <h3>Title One</h3>
+                        <h4>25 April 2012 | 10:05 wib</h4>
+                        <p>Natoque penatibus et magnis dis parturient ontes, nascetur ridiculus mus. Nulla dui. Fusce feugiat suada odio. Morbi nunc odio.
+                        </p>
+                    </div><!--end of news3-->
+                </div><!--end of news-->
+                
+            </div><!--end of bottomRight-->
+            
+        </div><!--end of contentBottom--> 
+    </div><!--end of content-->
+    
+	<div id="footer">
+    	Copyright &copy; 2012 | By BabaStudio.com  
+    </div><!--end of footer--> 
+       
+</div><!--end of wrapper-->
+
+</body>
+</html>
