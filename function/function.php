@@ -98,17 +98,17 @@ $(document).ready(
 
 		  			$sql="SELECT * FROM slider_tbl";
 					//4. Jalankan/lakukan Perintah/syntax SQL
-		  			$qslider=mysqli_query($koneksi,$sql);
+		  			$qslider=$koneksi->query($sql);
 
 		  			//5. Masukan hasil query ke variable aray
-		  			$rowslider=mysqli_fetch_array($qslider);
+		  			$rowslider=$qslider->fetch_array();
 		  			//6. Check apakah hasil menjalankan perintah sql ada hasilnya?
 				?>
                 <?php do {?>
                 <div>
         		<img src="images/<?php echo $rowslider["image"];?>" class="sliderBorder">
             </div>
-            <?php }while($rowslider=mysqli_fetch_array($qslider));?>
+            <?php }while($rowslider=$qslider->fetch_array());?>
 <?php }?>
 
 <?php function get_search(){?>
@@ -159,8 +159,8 @@ $(document).ready(
                       global $koneksi;
 
                       $sql = "SELECT * FROM NEWS_tbl ORDER BY createdate DESC LIMIT 3";
-                      $query = mysqli_query($koneksi,$sql);
-                      $rows = mysqli_fetch_array($query);
+                      $query = $koneksi->query($sql);
+                      $rows = $query->fetch_array();
                       do{
                     ?>
                   <!--- Start Looping --->
@@ -173,7 +173,7 @@ $(document).ready(
 
                   <a href="detail.php?newsdetail&id=<?php echo $rows['id'] ?>">Read More &gt;&gt;</a>
                   <!-- End Looping -->
-                  <?php }while($rows = mysqli_fetch_array($query)); ?>
+                  <?php }while($rows = $query->fetch_array()); ?>
 
 <?php }?>
 
@@ -187,13 +187,19 @@ $(document).ready(
         	  <div id="blogs">
                 <h2>Blogs</h2>
                 <?php
-
-                  global $koneksi;
-
-                  $sql = "SELECT * FROM NEWS_tbl ORDER BY createdate DESC LIMIT 3";
-                  $query = mysqli_query($koneksi,$sql);
-                  $rows = mysqli_fetch_array($query);
-                  do{
+                global $koneksi;
+                $view =5;
+                 if($page = isset($_GET["page"])){
+                   $page_aktif = $_GET['page'];
+                 }else{
+                   $page_aktif = 1;
+                 }
+                 $awaldata = ($page_aktif-1) * $view;
+                 $sql = "SELECT * FROM news_tbl ORDER BY createdate DESC LIMIT $awaldata,$view";
+                 $query = $koneksi->query($sql);
+                 $rows = $query->fetch_assoc();
+                 $no = 1;
+                do{
                 ?>
                 <div style="display: block; overflow: hidden; margin-bottom: 15px;" id="blog1">
                     <img src="images/news/<?php echo $rows['image'] ?>" width="200">
@@ -204,16 +210,28 @@ $(document).ready(
                     </p>
                     <a href="detail.php?newsdetail&id=">Read More &gt;&gt;</a>
                 </div>
-                <?php }while($rows = mysqli_fetch_array($query)); ?>
+                <?php }while($rows = $query->fetch_array()); ?>
 
                 <br>
 
+                <?php
+                    $sqltotal = "SELECT * FROM news_tbl";
+                    $qtotal = $koneksi->query($sqltotal);
+                    $total_data = $qtotal->num_rows;
+                    $total_page = ceil($total_data/$view);
+                ?>
                 <div id="paging">
-                    <a href="#">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
+                 <?php for ($i=1; $i<=$total_page ; $i++){ ?>
+                   <?php if($i == $page_aktif) { ?>
+                     <span class="pagelinkactive">
+                       <a style="background-color:red !important;" class="pagelink" href="detail.php?blog&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                     </span>
+                   <?php }else{ ?>
+
+                       <a class="pagelink" href="detail.php?blog&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+
+                   <?php } ?>
+                  <?php } ?>
                 </div>
             </div><!--end of news-->
 
@@ -230,43 +248,61 @@ $(document).ready(
                 <h2>News</h2>
                 <?php
                 global $koneksi;
-                $halaman = 4;
-                 $page = isset($_GET["halaman"]);
-                 if($page == "" || $page != ""){
-                   $page = 2;
+                $view =5;
+                 if($page = isset($_GET["page"])){
+                   $page_aktif = $_GET['page'];
+                 }else{
+                   $page_aktif = 1;
                  }
-                 $mulai = ($page>1) ? ($page * $halaman) - $halaman : 0;
-                 $result = mysqli_query($koneksi,"SELECT * FROM news_tbl");
-                 $total = mysqli_num_rows($result);
-                 $pages = ceil($total/$halaman);
-                 $query = mysqli_query($koneksi,"select * from news_tbl LIMIT $mulai, $halaman")or die(mysql_error);
-                 $rows = mysqli_fetch_array($query);
+                 $awaldata = ($page_aktif-1) * $view;
+                 $sql = "SELECT * FROM news_tbl ORDER BY createdate DESC LIMIT $awaldata,$view";
+                 $query = $koneksi->query($sql);
+                 $rows = $query->fetch_assoc();
+                 $no = 1;
                 do{
                 ?>
               <!--- Start Looping Data --->
                 <div class="blog1">
                    <img src="images/news/<?php echo $rows['image'] ?>" width="100">
-                    <h3><?php echo $rows['title'] ?></h3>
-                    <h5><?php echo indonesiadate($rows['createdate']) ?></h5>
-                    <p>
-                        <?php echo substr( $rows['synopsis'],0,100) ?>
-                    </p>
-                    <a href="detail.php?newsdetail&id=<?php echo $rows['id'] ?>">Read More &gt;&gt;</a>
+                   <div style="display:inline-block; width:480px;">
+                     <h3 style="margin-bottom:15px; color:#fff;"><?php echo $rows['title'] ?></h3>
+                     <h5 style="margin-bottom:15px; color:#fff;"><?php echo indonesiadate($rows['createdate']) ?></h5>
+                     <p style="color:#fff;">
+                         <?php echo substr( $rows['synopsis'],0,100) ?>
+                     </p>
+                     <a href="detail.php?newsdetail&id=<?php echo $rows['id'] ?>">Read More &gt;&gt;</a>
+                   </div>
                 </div>
                 <?php }while($rows = mysqli_fetch_array($query)); ?>
  			 <!--- End looping Data --->
 
-        <div id="paging">
-             <span class="pagelinkactive">1</span>
-             <?php for ($i=1; $i<=$pages ; $i++){ ?>
-              <a class="pagelink" href="?halaman=<?php echo $i; ?>"><?php echo $i; ?></a>
-              <?php } ?>
+       <?php
+           $sqltotal = "SELECT * FROM news_tbl";
+           $qtotal = $koneksi->query($sqltotal);
+           $total_data = $qtotal->num_rows;
+           $total_page = ceil($total_data/$view);
+       ?>
+       <div id="paging">
+        <?php for ($i=1; $i<=$total_page ; $i++){ ?>
+          <?php if($i == $page_aktif) { ?>
+            <span class="pagelinkactive">
+              <a style="background-color:red !important;" class="pagelink" href="detail.php?news&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+            </span>
+          <?php }else{ ?>
+
+              <a class="pagelink" href="detail.php?news&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+
+          <?php } ?>
+         <?php } ?>
+       </div>
+
 	 </div>
+   <div id="iklan">
+         <img src="images/iklan.jpg">
+     </div><!--end of bottomRight-->
             </div><!--end of news-->
 
-        	<div id="iklan">
-                <img src="images/iklan.jpg">
-            </div><!--end of bottomRight-->
+
 <?php }?>
 
 <?php function get_gallery() {?>
@@ -374,11 +410,11 @@ $(document).ready(
 
   ?>
     <a name="newsdetail"></a>
-	<h2 class="newsdate"> <?php echo indonesiadate($rows['createdate'])  ?> </h2>
+	<h2 style="margin-bottom:10px;" class="newsdate"> <?php echo indonesiadate($rows['createdate'])  ?> </h2>
 
-	<h3 class="newstitle"> <?php echo $rows['title'] ?> </h3>
+	<h3 style="margin-bottom:10px;" class="newstitle"> <?php echo $rows['title'] ?> </h3>
 
-    <p class="newsdetail">
+    <p style="width:800px;" class="newsdetail">
     	<img src="images/news/<?php echo $rows['image'] ?>" width="300"><?php echo $rows['synopsis'] ?>
     </p>
     <br>
@@ -403,9 +439,9 @@ $(document).ready(
           ?>
 
             <!--start looping--->
-            <div class="newsitem">
+            <div style="overflow:hidden;" class="newsitem">
              <h2 class="newsdate"><?php echo indonesiadate($rows['createdate']) ?></h2>
-             <h3 class="newstitle"><?php echo $rows['title'] ?></h3>
+             <h3 class="newstitle"><?php echo $rows['title'] ?></h3><br>
              <p class="newsparagraf">
                <img src="images/news/<?php echo $rows['image'] ?>" /><?php echo substr($rows['synopsis'],0,100) ?>
              </p>
@@ -554,9 +590,12 @@ $(document).ready(
 	 $memberpassword=md5($_POST["memberpassword"]);
 	 //4. Buat syntax SQL
 	 $sql="INSERT INTO member_tbl(membername,memberpassword,createdate) VALUES ('$membername','$memberpassword',now()) ";
-
+   $query = $koneksi->query($sql);
+   if($query){
+     $_SESSION["membername"]=$membername;
+   }
 	 //5. Jalankan Perintah SQL
-	 mysqli_query($koneksi,$sql);
+	 //mysqli_query($koneksi,$sql);
 
 	//6. Kembali ke index.php
 	echo "<script language='javascript'>";	 	echo "window.location.href='index.php';";

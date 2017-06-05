@@ -1,14 +1,14 @@
-<?php 
+<?php
  function indonesiadate($thedate) {
 	  $hari=substr($thedate,8,2);
 	  $bulan=get_namabulan(substr($thedate,5,2));
 	  $tahun=substr($thedate,0,4);
 
-	  
+
 	  $hour=substr($thedate,11,2);
 	  $minutes=substr($thedate,14,2);
 	  $second=substr($thedate,17,2);
-	  
+
 	  $tanggal="$hari-$bulan-$tahun | $hour:$minutes:$second wib";
 	  return $tanggal;
 	 }
@@ -55,13 +55,13 @@
 		 }
 		 return $namabulan;
 	 }
-	 
+
 	 function gotopage($page){
 		echo "<script language='javascript'>";
 		echo "window.location.href='$page';";
 		echo "</script>";
 		 }
-	
+
 	function get_currentsingledate($selection){
 		date_default_timezone_set('Asia/Jakarta');
 		$thedate=getdate();
@@ -71,12 +71,12 @@
 		$hours=$thedate["hours"];
 		$minutes=$thedate["minutes"];
 		$seconds=$thedate["seconds"];
-		
+
 		switch ($selection) {
 			case "year" :
 			return $year;
 			break;
-			
+
 			case "month" :
 			return $month;
 			break;
@@ -98,6 +98,6 @@
 			break;
 
 		}
-		
+
 		}
 ?>

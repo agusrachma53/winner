@@ -17,14 +17,14 @@
          <?php get_menu(); ?>
      </div><!--End Admin Menu -->
      <div id="admincontent"><!--Start Admin Content -->
-       <?php if (isset($_SESSION["username"])) { ?> 
+       <?php if (isset($_SESSION["username"])) { ?>
         <div id="userlogout">
             <strong><?php echo $_SESSION["username"]; ?></strong>
             &nbsp;|&nbsp;
             <a href="logout.php">logout</a>
         </div>
-       <?php } ?> 
-        
+       <?php } ?>
+
 		<?php
 		  if (isset($_GET["news"])) {
 			  get_news();
@@ -57,7 +57,7 @@
 			  get_commentseditform();
 		  }
 		  else {
-			 get_news();   
+			 get_news();
 		  }
 		?>
      </div><!--Start Admin Content -->

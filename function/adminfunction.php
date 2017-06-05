@@ -2,6 +2,12 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>CMS Web Corporate</title>
 <link rel="stylesheet" type="text/css" href="../style/adminstyle.css" />
+<link rel="stylesheet" type="text/css" href="../style/style.css">
+<link rel="stylesheet" type="text/css" href="../jquery.lightbox-0.5.css">
+
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/jquery.innerfade.js"></script>
+<script type="text/javascript" src="../js/jquery.lightbox-0.5.js"></script>
 <?php } ?>
 
 <?php function get_header() { ?>
@@ -32,17 +38,16 @@
 
           <?php
           global $koneksi;
-          $halaman = 10;
-           $page = isset($_GET["halaman"]);
-           if($page == "" || $page != ""){
-             $page = 1;
+          $view =5;
+           if($page = isset($_GET["page"])){
+             $page_aktif = $_GET['page'];
+           }else{
+             $page_aktif = 1;
            }
-           $mulai = ($page>1) ? ($page * $halaman) - $halaman : 0;
-           $result = mysqli_query($koneksi,"SELECT * FROM news_tbl");
-           $total = mysqli_num_rows($result);
-           $pages = ceil($total/$halaman);
-           $query = mysqli_query($koneksi,"SELECT * FROM news_tbl ORDER BY createdate DESC LIMIT $mulai, $halaman")or die(mysql_error);
-           $rows = mysqli_fetch_array($query);
+           $awaldata = ($page_aktif-1) * $view;
+           $sql = "SELECT * FROM news_tbl ORDER BY createdate DESC LIMIT $awaldata,$view";
+           $query = $koneksi->query($sql);
+           $rows = $query->fetch_assoc();
            $no = 1;
           do{
           ?>
@@ -64,12 +69,31 @@
                 </a>
                 </td>
               </tr>
-              <?php $no++; }while($rows = mysqli_fetch_array($query)); ?>
-        <!--- Jika Kosong --->
-
+              <?php $no++; }while($rows = $query->fetch_assoc()); ?>
         </table>
          <br />
          <a href="admin.php?newsadd">+&nbsp;Add</a>
+         <!-- paging -->
+             <?php
+                 $sqltotal = "SELECT * FROM news_tbl";
+                 $qtotal = $koneksi->query($sqltotal);
+                 $total_data = $qtotal->num_rows;
+                 $total_page = ceil($total_data/$view);
+             ?>
+             <div id="paging">
+              <?php for ($i=1; $i<=$total_page ; $i++){ ?>
+                <?php if($i == $page_aktif) { ?>
+                  <span class="pagelinkactive">
+                    <a style="background-color:red !important;" class="pagelink" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                  </span>
+                <?php }else{ ?>
+
+                    <a class="pagelink" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+
+                <?php } ?>
+               <?php } ?>
+             </div>
+
 <?php } ?>
 
 <?php function get_blogs() { ?>
@@ -181,9 +205,15 @@
 				 else {
 					 $selected="";
 				 }
+
+         if($day < 10){
+           $daynya = "0" . $day;
+         }else{
+           $daynya =  $day;
+         }
 			   ?>
-              <option value="<?php echo $day; ?>" <?php echo $selected; ?> >
-                <?php echo $day; ?>
+              <option value="<?php echo $daynya; ?>" <?php echo $selected; ?> >
+                <?php echo $daynya; ?>
               </option>
              <?php } ?>
            </select>
@@ -199,17 +229,25 @@
 				else {
 					$selected="";
 				}
+        if($month < 10){
+          $monthnya = "0" . $month;
+        }else{
+          $monthnya = $month;
+        }
 			  ?>
-              <option value="" <?php echo $selected; ?>>
+              <option value="<?php echo $monthnya ?>" <?php echo $selected; ?>>
                <?php echo get_namabulan($month); ?>
               </option>
              <?php } ?>
            </select>
            &nbsp;
+           <?php
+           $datew = date("Y-m-d");
+           $date_sub = substr($datew,0,4);?>
            <select id="year" name="year">
-             <option value="">Year</option>
 
-             <?php for ($year=2012;$year>=1905;$year--) { ?>
+             <option value="">Year</option>
+             <?php for ($year=$date_sub;$year>=1905;$year--) { ?>
               <?php
 			    if ($year==get_currentsingledate("year")) {
 					$selected="selected='selected'";
@@ -218,42 +256,72 @@
 				   $selected="";
 				}
 			  ?>
-             <option value="" <?php echo $selected; ?>>
+             <option value="<?php echo $year; ?>" <?php echo $selected; ?>>
                <?php echo $year; ?>
              </option>
              <?php } ?>
            </select>
            &nbsp;&nbsp;
-           <input type="text" size="5" name="hour" id="hour" value="<?php echo get_currentsingledate("hours"); ?>" />
+           <?php
+           $hours = get_currentsingledate("hours");
+           $minute = get_currentsingledate("minutes");
+           if($hours < 10){
+             $hours_date = "0" . $hours;
+           }else{
+             $hours_date = $hours;
+           }
+
+           ?>
+           <input style="width:50px !important;" type="text" size="5" name="hour" id="hour" value="<?php echo $hours_date;  ?>" />
            &nbsp;:&nbsp;
-           <input type="text" size="5" name="minutes" id="minutes" value="<?php  echo get_currentsingledate("minutes"); ?>" />
+
+           <?php
+           $minute = get_currentsingledate("minutes");
+           if($minute <  10){
+             $minute_date = "0" . $minute;
+           }else{
+             $minute_date = $minute;
+           }
+
+           ?>
+
+           <input style="width:50px !important;"   type="text" size="5" name="minutes" id="minutes" value="<?php  echo $minute_date ?>" />
           </td>
         </tr>
         <tr>
           <td>Image</td>
           <td>:</td>
           <td>
-           <input type="file" size="40" name="image" id="image" value="" required="required" />
+           <input  type="file" size="40" name="image" id="image" value="" required="required" />
           </td>
         </tr>
         <tr>
           <td>Sinopsis</td>
           <td>:</td>
           <td>
-           <textarea id="synopsis" name="synopsis" cols="40" rows="8" required></textarea>
+           <textarea style="width:600px !important" id="synopsis" name="synopsis" cols="40" rows="8" required></textarea>
           </td>
         </tr>
         <tr>
           <td>Detail</td>
           <td>:</td>
           <td>
-           <textarea id="detail" name="detail" cols="40" rows="8" required></textarea>
+           <textarea style="width:600px !important" id="detail" name="detail" cols="40" rows="8" required></textarea>
           </td>
         </tr>
         <tr>
           <td>&nbsp;</td>
           <td>&nbsp;</td>
           <td>
+            <?php
+            $date = get_currentsingledate("seconds");
+            if($date < 10){
+              $date_time = "0" . $date;
+            }else{
+              $date_time = $date;
+            }
+            ?>
+            <input type="hidden" name="detik" value="<?php echo $date_time; ?>">
            <input type="submit" id="newssubmit" name="newssubmit" value="INSERT" />
           </td>
         </tr>
@@ -268,7 +336,13 @@
   global $koneksi;
   if($_POST['newssubmit'] == "INSERT"){
   $title = $_POST['title'];
-  $date = date('Y-m-d h:i:m');
+  $day = $_POST['day'];
+  $month = $_POST['month'];
+  $hours = $_POST['hour'];
+  $minute = $_POST['minutes'];
+  $year = $_POST['year'];
+  $detik = $_POST['detik'];
+  $date = $year . "-" . $month . "-" . $day . " " . $hours . ":" . $minute . ":" . $detik ;
   $synopsis = $_POST['synopsis'];
   $detail = $_POST['detail'];
   //$oldimage = $_POST['oldimage'];
@@ -303,6 +377,7 @@
    $query = mysqli_query($koneksi,$sql);
    $rows = mysqli_fetch_array($query);
    if($rows > 0){
+     unlink("../images/news/" . $rows['image']);
      $sql = "DELETE  FROM news_tbl WHERE id = $id";
      $querynya = mysqli_query($koneksi,$sql);
      if($querynya){
@@ -331,8 +406,8 @@
 
    $id = $_GET['id'];
     $sql = "SELECT * FROM news_tbl WHERE id = $id";
-    $query = mysqli_query($koneksi,$sql);
-    $rows = mysqli_fetch_array($query);
+    $query = $koneksi->query($sql);
+    $rows = $query->fetch_array();
     $datee = $rows['createdate'];
     //echo $datee .  " | " ;
     $year = substr($datee,0,4);
@@ -395,9 +470,13 @@
            </select>
            &nbsp;
            <select id="year" name="year" required="required">
+             <?php
+             $datew = date("Y-m-d");
+             $date_sub = substr($datew,0,4);?>
+             ?>
              <option value="<?php echo $year ?>"><?php echo $year ?></option>
 
-             <?php for ($year=2012;$year>=1905;$year--) { ?>
+             <?php for ($year=$date_sub ;$year>=1905;$year--) { ?>
 
              <option value="<?php echo $year; ?>" >
                <?php echo $year; ?>
@@ -408,9 +487,9 @@
            <?php
 
             ?>
-           <input type="text" size="5" name="hour" id="hour" value="<?php echo $hour;  ?>" />
+           <input style="width:50px !important;"  type="text" size="5" name="hour" id="hour" value="<?php echo $hour;  ?>" />
            &nbsp;:&nbsp;
-           <input type="text" size="5" name="minutes" id="minutes" value="<?php echo $menute; ?>" />
+           <input style="width:50px !important;"  type="text" size="5" name="minutes" id="minutes" value="<?php echo $menute; ?>" />
           </td>
         </tr>
         <tr>
@@ -426,14 +505,14 @@
           <td>Sinopsis</td>
           <td>:</td>
           <td>
-           <textarea id="synopsis" name="synopsis" cols="40" rows="8" required><?php echo $rows['synopsis'] ?></textarea>
+           <textarea style="width:600px !important" id="synopsis" name="synopsis" cols="40" rows="8" required><?php echo $rows['synopsis'] ?></textarea>
           </td>
         </tr>
         <tr>
           <td>Detail</td>
           <td>:</td>
           <td>
-           <textarea id="detail" name="detail" cols="40" rows="8" required><?php echo $rows['detail'] ?></textarea>
+           <textarea style="width:600px !important" id="detail" name="detail" cols="40" rows="8" required><?php echo $rows['detail'] ?></textarea>
           </td>
         </tr>
         <tr>

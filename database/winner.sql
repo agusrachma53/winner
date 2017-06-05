@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2017 at 12:34 AM
+-- Generation Time: Jun 05, 2017 at 07:21 AM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -84,7 +84,10 @@ INSERT INTO `member_tbl` (`id`, `membername`, `memberpassword`, `memberdesc`, `c
 (3, 'nyoman@gmail.com', 'c5b9e3510050df2bd3e55c5266a620e6', '', '2012-06-18 13:51:08'),
 (4, 'ganteng@ganteng.com', 'c5752ceb32e5107f5cd9df31a453241f', '', '2012-06-18 14:10:14'),
 (5, 'halo@gmail.com', '57f842286171094855e51fc3a541c1e2', '', '2012-06-18 15:21:34'),
-(6, 'agus@gmail.com', '202cb962ac59075b964b07152d234b70', '', '2017-05-23 00:14:58');
+(6, 'agus@gmail.com', '202cb962ac59075b964b07152d234b70', '', '2017-05-23 00:14:58'),
+(7, 'agus@gmail.com', 'fe3e30791cf54b6401d73526abcb7c7b', '', '2017-06-05 11:43:41'),
+(8, 'fal@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', '', '2017-06-05 11:46:21'),
+(9, 'lah@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', '', '2017-06-05 12:05:26');
 
 -- --------------------------------------------------------
 
@@ -151,10 +154,8 @@ INSERT INTO `news_tbl` (`id`, `title`, `image`, `synopsis`, `detail`, `createdat
 (14, 'Berburu Hard Disk Eksternal di FKI 2012', '1143156620X310.jpg', 'JAKARTA, KOMPAS.com - Pertumbuhan jumlah pengguna komputer pribadi dan kebutuhan tempat penyimpanan data yang mobile membuat permintaan terhadap hard disk eksternal naik.\r\n\r\nBerdasarkan pantauan KompasTekno di area Festival Komputer Indonesia 2012 di Jakarta Convention Center, perangkat hard disk eksternal sudah mulai diminati pengunjung pameran. ', 'JAKARTA, KOMPAS.com - Pertumbuhan jumlah pengguna komputer pribadi dan kebutuhan tempat penyimpanan data yang mobile membuat permintaan terhadap hard disk eksternal naik.\r\n\r\nBerdasarkan pantauan KompasTekno di area Festival Komputer Indonesia 2012 di Jakarta Convention Center, perangkat hard disk eksternal sudah mulai diminati pengunjung pameran.\r\n\r\nApalagi harga yang ditawarkan sudah sedikit lebih murah bila dibandingkan selepas terjadi banjir di Thailand akhir tahun lalu, yang turut menyebabkan pabrik hard disk di sana terendam air.\r\n\r\nNamun, tidak banyak vendor hard disk yang ikut berpartisipasi dalam pameran tersebut. Mereka di antaranya adalah vendor hard disk besar seperti Western Digital, Buffalo dan Toshiba.\r\n', '2012-06-12 14:10:28'),
 (15, 'Berburu Hard Disk Eksternal di FKI 2012', '1143156620X310.jpg', 'JAKARTA, KOMPAS.com - Pertumbuhan jumlah pengguna komputer pribadi dan kebutuhan tempat penyimpanan data yang mobile membuat permintaan terhadap hard disk eksternal naik.\r\n\r\nBerdasarkan pantauan KompasTekno di area Festival Komputer Indonesia 2012 di Jakarta Convention Center, perangkat hard disk eksternal sudah mulai diminati pengunjung pameran. ', 'JAKARTA, KOMPAS.com - Pertumbuhan jumlah pengguna komputer pribadi dan kebutuhan tempat penyimpanan data yang mobile membuat permintaan terhadap hard disk eksternal naik.\r\n\r\nBerdasarkan pantauan KompasTekno di area Festival Komputer Indonesia 2012 di Jakarta Convention Center, perangkat hard disk eksternal sudah mulai diminati pengunjung pameran.\r\n\r\nApalagi harga yang ditawarkan sudah sedikit lebih murah bila dibandingkan selepas terjadi banjir di Thailand akhir tahun lalu, yang turut menyebabkan pabrik hard disk di sana terendam air.\r\n\r\nNamun, tidak banyak vendor hard disk yang ikut berpartisipasi dalam pameran tersebut. Mereka di antaranya adalah vendor hard disk besar seperti Western Digital, Buffalo dan Toshiba.\r\n', '2012-06-12 14:10:28'),
 (11, 'Chip Baru Bikin Laptop Sanggup "Lahap Game Berat"', '2227464620X310.jpg', 'KOMPAS.com - Berita bagus untuk gamer yang gemar main game-game "berat", alias memiliki kualitas grafis tinggi, dengan memakai laptop.\r\n\r\nNvidia telah merilis GeForce GTX 680M, chip pengolah grafis (GPU) mobile yang diklaim perusahaan tersebut sebagai yang terkencang yang pernah dibuat.', '\r\nChip Baru Bikin Laptop Sanggup "Lahap Game Berat"\r\nOik Yusuf | Wicaksono Surya Hidayat | Rabu, 6 Juni 2012 | 19:07 WIB\r\nDibaca: 8068\r\nKomentar: -\r\n|\r\nShare:\r\nNVIDIA\r\n\r\nKOMPAS.com - Berita bagus untuk gamer yang gemar main game-game "berat", alias memiliki kualitas grafis tinggi, dengan memakai laptop.\r\n\r\nNvidia telah merilis GeForce GTX 680M, chip pengolah grafis (GPU) mobile yang diklaim perusahaan tersebut sebagai yang terkencang yang pernah dibuat.\r\n\r\nGeForce GTX 680M yang memiliki arsitektur "Kepler" tersebut dibuat dengan proses fabrikasi 28 nm. Di dalamnya terdapat 1.344 inti prosesor (core) yang bekerja pada frekuensi 720 MHz.\r\n\r\nUntuk menyalurkan data grafis, Nvidia memadukan GTX 680M dengan RAM GDDR5 256-bit berkecepatan 3,6 GHz hingga sejumlah 4 GB.\r\n\r\nSebagai perbandingan, GeForce GTX 660M yang berada di bawah GTX 680M  memiliki 684 inti prosesor yang berjalan pada frekuensi 835 MHz. Adapun GTX 675M menggunakan arsitektur berbeda (dengan kode nama "Fermi") meskipun menggunakan nama yang mirip.', '2012-06-12 14:11:18'),
-(23, 'ghjghjghjghj', '013.jpg', 'ddddddddddsssssssssssssssssssssssss', '1111111111111111111111111111111111111111', '2009-05-05 04:57:05'),
-(24, 'Berburu Hard Disk Eksternal di FKI 2012', '019.jpg', 'KOMPAS.com - Berita bagus untuk gamer yang gemar main game-game "berat", alias memiliki kualitas grafis tinggi, dengan memakai laptop.\r\n\r\nNvidia telah merilis GeForce GTX 680M, chip pengolah grafis (GPU) mobile yang diklaim perusahaan tersebut sebagai yang terkencang yang pernah dibuat.', 'KOMPAS.com - Berita bagus untuk gamer yang gemar main game-game "berat", alias memiliki kualitas grafis tinggi, dengan memakai laptop.\r\n\r\nNvidia telah merilis GeForce GTX 680M, chip pengolah grafis (GPU) mobile yang diklaim perusahaan tersebut sebagai yang terkencang yang pernah dibuat.', '2017-05-24 04:33:05'),
-(25, 'Chip Baru Bikin Laptop Sanggup ', '021.jpg', 'KOMPAS.com - Berita bagus untuk gamer yang gemar main game-game "berat", alias memiliki kualitas grafis tinggi, dengan memakai laptop.\r\n\r\nNvidia telah merilis GeForce GTX 680M, chip pengolah grafis (GPU) mobile yang diklaim perusahaan tersebut sebagai yang terkencang yang pernah dibuat.', 'KOMPAS.com - Berita bagus untuk gamer yang gemar main game-game "berat", alias memiliki kualitas grafis tinggi, dengan memakai laptop.\r\n\r\nNvidia telah merilis GeForce GTX 680M, chip pengolah grafis (GPU) mobile yang diklaim perusahaan tersebut sebagai yang terkencang yang pernah dibuat.', '2017-04-24 04:35:05'),
-(21, 'sdfsdfsdfdsfdsf', '020.jpg', 'ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt', 'fffffffffffffffffffffffffffffffff', '2009-05-05 04:57:05');
+(24, 'Berburu Hard Disk Eksternal di FKI 2013', '019.jpg', 'KOMPAS.com - Berita bagus untuk gamer yang gemar main game-game "berat", alias memiliki kualitas grafis tinggi, dengan memakai laptop.\r\n\r\nNvidia telah merilis GeForce GTX 680M, chip pengolah grafis (GPU) mobile yang diklaim perusahaan tersebut sebagai yang terkencang yang pernah dibuat.', 'KOMPAS.com - Berita bagus untuk gamer yang gemar main game-game "berat", alias memiliki kualitas grafis tinggi, dengan memakai laptop.\r\n\r\nNvidia telah merilis GeForce GTX 680M, chip pengolah grafis (GPU) mobile yang diklaim perusahaan tersebut sebagai yang terkencang yang pernah dibuat.', '2005-05-24 04:33:05'),
+(25, 'Chip Baru Bikin Laptop Sanggup ', '021.jpg', 'KOMPAS.com - Berita bagus untuk gamer yang gemar main game-game "berat", alias memiliki kualitas grafis tinggi, dengan memakai laptop.\r\n\r\nNvidia telah merilis GeForce GTX 680M, chip pengolah grafis (GPU) mobile yang diklaim perusahaan tersebut sebagai yang terkencang yang pernah dibuat.', 'KOMPAS.com - Berita bagus untuk gamer yang gemar main game-game "berat", alias memiliki kualitas grafis tinggi, dengan memakai laptop.\r\n\r\nNvidia telah merilis GeForce GTX 680M, chip pengolah grafis (GPU) mobile yang diklaim perusahaan tersebut sebagai yang terkencang yang pernah dibuat.', '2017-04-24 04:35:05');
 
 -- --------------------------------------------------------
 
@@ -263,7 +264,7 @@ ALTER TABLE `gallery_tbl`
 -- AUTO_INCREMENT for table `member_tbl`
 --
 ALTER TABLE `member_tbl`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `newscomment_tbl`
 --
@@ -273,7 +274,7 @@ ALTER TABLE `newscomment_tbl`
 -- AUTO_INCREMENT for table `news_tbl`
 --
 ALTER TABLE `news_tbl`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `slider_tbl`
 --
